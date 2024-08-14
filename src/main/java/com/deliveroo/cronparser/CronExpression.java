@@ -2,7 +2,7 @@ package com.deliveroo.cronparser;
 
 import java.util.Set;
 
-public class CronExpression{
+public class CronExpression {
     private CronField minute;
     private CronField hour;
     private CronField dayOfMonth;
@@ -22,29 +22,37 @@ public class CronExpression{
     }
 
     public void printCronExpression() {
-        printField("minute", minute.getParsedValues());
-        printField("hour", hour.getParsedValues());
-        printField("day of month", dayOfMonth.getParsedValues());
-        printField("month", month.getParsedValues());
-        printField("day of week", dayOfWeek.getParsedValues());
-        printField("command", command);
+        StringBuilder output = new StringBuilder();
+
+        appendField(output, "minute", minute.getParsedValues());
+        appendField(output, "hour", hour.getParsedValues());
+        appendField(output, "day of month", dayOfMonth.getParsedValues());
+        appendField(output, "month", month.getParsedValues());
+        appendField(output, "day of week", dayOfWeek.getParsedValues());
+        appendField(output, "command", command);
+
+        System.out.print(output.toString());
     }
 
-    private void validateCommand(String command){
+    private void validateCommand(String command) {
         if (command == null || command.trim().isEmpty()) {
             throw new IllegalArgumentException("Command field cannot be empty.");
         }
     }
 
-    private void printField(String name, Set<Integer> values){
-        System.out.printf("%-14s ", name);
-        for(int val : values){
-            System.out.print(val + " ");
+    private void appendField(StringBuilder output, String name, Set<Integer> values) {
+        output.append(String.format("%-14s", name));
+        if (values != null && !values.isEmpty()) {
+            for (int val : values) {
+                output.append(val);
+                output.append(" ");
+            }
         }
-        System.out.println();
+        output.setLength(output.length() - 1);
+        output.append("\n");
     }
 
-    private void printField(String name, String value){
-        System.out.printf("%-14s %s%n", name, value);
+    private void appendField(StringBuilder output, String name, String value) {
+        output.append(String.format("%-14s%s%n", name, value));
     }
 }
