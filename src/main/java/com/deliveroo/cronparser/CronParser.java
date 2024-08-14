@@ -12,7 +12,7 @@ public class CronParser {
         }
     }
 
-    public static void handleCronExpression(String[] args) {
+    private static void handleCronExpression(String[] args) {
         String[] expressionParts = validateAndPreprocessExpression(args);
 
         String minuteExp = expressionParts[0];

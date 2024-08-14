@@ -36,7 +36,7 @@ public class CronParserTest {
 
         String[] args = { cronExpression };
 
-        CronParser.handleCronExpression(args);
+        CronParser.main(args);
 
         String expectedOutput = 
         "minute        0 10 20 30 40 50\n" +
@@ -55,27 +55,19 @@ public class CronParserTest {
 
         String[] args = { cronExpression };
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CronParser.handleCronExpression(args);
-        });
+        CronParser.main(args);
 
         String expectedError = "Invalid cron expression. Expected 5 fields and a command.";
-        String actualError = exception.getMessage();
-
-        assertTrue(actualError.contains(expectedError));
+        assertTrue(errContent.toString().contains(expectedError));
     }
 
     @Test
     public void testInvalidCronExpressionArgumentCount() {
         String[] args = {}; // No arguments
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            CronParser.handleCronExpression(args);
-        });
+        CronParser.main(args);
 
         String expectedError = "Usage: java CronParser \"<cron_expression>\"";
-        String actualError = exception.getMessage();
-
-        assertTrue(actualError.contains(expectedError));
+        assertTrue(errContent.toString().contains(expectedError));
     }
 }
