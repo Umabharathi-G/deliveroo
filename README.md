@@ -66,7 +66,7 @@ The `cron-parser` application allows you to parse cron expressions. Provide a va
 - **Hours** (0 - 23)
 - **Day of the Month** (1 - 31)
 - **Month** (1 - 12)
-- **Day of the Week** (0 - 6)
+- **Day of the Week** (1 - 7)
 - **Command to execute**
 
 The program will output each field's parsed values, formatted for easy reading.
