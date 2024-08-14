@@ -24,3 +24,80 @@ This project uses the following dependencies:
       <version>5.9.3</version>
       <scope>test</scope>
   </dependency>
+
+## Getting Started
+
+### Download the jar
+You can download the jar file from [cron-parser.jar](https://github.com/Umabharathi-G/deliveroo/releases)
+
+Or you can follow the below steps to install the cron parser.
+
+### Prerequisites
+
+- **Java Version**: 17
+- **Maven Version**: 3.9.8
+
+### Installation
+
+To get started with the `cron-parser` project, follow these steps:
+
+1. **Clone** the repository:
+
+    ```bash
+    git clone https://github.com/yourusername/cron-parser.git
+    ```
+    ```bash
+    cd cron-parser
+    ```
+
+2. **Build** the project using Maven:
+
+    ```bash
+    mvn clean install
+    ```
+This will create a jar file in the target directory.
+
+
+## Usage
+
+The `cron-parser` application allows you to parse cron expressions. Provide a valid cron expression as a string argument when running the program. The cron expression must consist of five fields representing:
+
+- **Minutes** (0 - 59)
+- **Hours** (0 - 23)
+- **Day of the Month** (1 - 31)
+- **Month** (1 - 12)
+- **Day of the Week** (0 - 6)
+- **Command to execute**
+
+The program will output each field's parsed values, formatted for easy reading.
+
+## Example
+Navigate to the target directory and run this command:
+
+```bash
+java -jar cronparser-1.0-SNAPSHOT.jar "*/15 0 1,15 * 1-5 /usr/bin/find"
+```
+Or run the downloaded jar from it's location
+
+```bash
+java -jar cron-parser.jar "*/15 0 1,15 * 1-5 /usr/bin/find"
+```
+
+Would output the parsed Cron Expression in the below format
+
+```
+minute        0 10 20 30 40 50
+hour          0
+day of month  15 17 19 21 23 25 27
+month         1 2 3 4 5 6 7 8 9 10 11 12
+day of week   2 3 4 5
+command       /usr/bin/find
+```
+## Running Tests
+To run the unit tests for this project, use the following Maven command:
+
+```bash
+mvn test
+```
+
+This will execute all the tests and provide a summary of the test results.
