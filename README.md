@@ -75,12 +75,12 @@ The program will output each field's parsed values, formatted for easy reading.
 Navigate to the target directory and run this command:
 
 ```bash
-java -jar cronparser-1.0-SNAPSHOT.jar "*/15 0 1,15 * 1-5 /usr/bin/find"
+java -jar cronparser-1.0-SNAPSHOT.jar "*/15 0 15-27/2 * 1-5 /usr/bin/find"
 ```
 Or run the downloaded jar from it's location
 
 ```bash
-java -jar cron-parser.jar "*/15 0 1,15 * 1-5 /usr/bin/find"
+java -jar cron-parser.jar "*/15 0 15-27/2 * 1-5 /usr/bin/find"
 ```
 
 Would output the parsed Cron Expression in the below format
