@@ -1,0 +1,8 @@
+# Ignore target directory
+target
+
+# Ignore Java class files
+*.class
+
+# Ignore JAR files
+*.jar
