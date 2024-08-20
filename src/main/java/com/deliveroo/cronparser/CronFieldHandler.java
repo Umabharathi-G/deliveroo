@@ -1,12 +1,28 @@
 package com.deliveroo.cronparser;
 
-import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 public class CronFieldHandler {
-
+    private static final Map<String, Integer> dayMap = new HashMap<>();
+    
+    static{
+        dayMap.put("SUN", 1);
+        dayMap.put("MON", 2);
+        dayMap.put("TUE", 3);
+        dayMap.put("WED", 4);
+        dayMap.put("THU", 5);
+        dayMap.put("FRI", 6);
+        dayMap.put("SAT", 7);
+    }
+    
     public static Set<Integer> handleField(String expression, int min, int max) {
+        
+        expression = parseDayName(expression);
+
         if (expression.equals("*")) {
             return parseWildcard(min, max);
         } else if (expression.contains(",")) {
@@ -18,6 +34,25 @@ public class CronFieldHandler {
         } else {
             return parseSingleValue(expression, min, max);
         }
+    }
+
+    private static String parseDayName(String expression){
+        expression = expression.toUpperCase();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < expression.length();){
+            char ch = expression.charAt(i);
+            if(ch >= 'A' && ch <= 'Z'){
+                String s = expression.substring(i, i + 3);
+                int index = dayMap.get(s);
+                sb.append(index);
+                i = i + 3;
+            }
+            else{
+                sb.append(ch);
+                i++;
+            }
+        }
+        return sb.toString();
     }
 
     private static Set<Integer> parseWildcard(int min, int max) {
